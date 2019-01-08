@@ -1,0 +1,27 @@
+Templates (or view templates)
+Templates (or view templates) are files that contain text that is converted into HTML before being sent to a user's browser in a response. There are a lot of different templating languages, and they all provide different ways to define what HTML to generate and how to embed dynamic values.
+
+
+<%= @title %> vs. <% @title%>
+- <% @title %> => Any Ruby code can be pasted into .erb template files as long as it's between the <% %>
+- <%= @title %> => To display the dynamic value within the .erb template file the "=" must be present <%= @title %> 
+
+Template Files
+.erb is a template file
+
+Route Parameters (:number)
+- By adding route parameters to the URL you can reduce duplication 
+- Values passed to the application through the URL in this way appear in the params Hash that is automatically made available in routes.
+
+get "/show/:name" do
+  params[:name]
+end
+
+
+Before Filters
+- We can move this common code into a before filter so that we only need to define it once in the program. Sinatra will run the code in a before filter before running the code in a matching route, so it's a good place to setup globally needed data. 
+
+before do
+  @contents = File.readlines("data/toc.txt")
+end
+

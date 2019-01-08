@@ -1,0 +1,37 @@
+<h2 class="content-subhead">Search</h2>
+
+<form action="/search" method="get">
+  <input name="query" value="<%= params[:query] %>"/>
+  <button type="submit">Search</button>
+</form>
+
+<% if params[:query] %>
+  <% if @results.empty? %>
+    <p>Sorry, no matches were found.</p>
+  <% else %>
+    <h2 class="content-subhead">Results for '<%= params[:query]%>'</h2>
+
+    <ul>
+      <% @results.each do |result| %>
+        <li><a href="/chapters/<%= result[:number] %>"><%= result[:name] %></a></li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
+
+
+<!-- 
+We need to somehow pull back in all of the @results array and display them bemneath the query 
+
+"Chapter #{result[:number]}: #{result[:name]}"
+
+array = [{number: 1, name: "They doubted me"}, {number: 2, name: "I said fuck you and did it"}]
+
+if array.empty?
+  puts "Sorry not today JR"
+else
+  array.each do |chapter|
+    puts "#{chapter[:number]} + #{chapter[:name]}"
+  end
+end 
+ -->
